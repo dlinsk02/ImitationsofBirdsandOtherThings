@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Poems</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      color: #111;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      transition: background-color 0.2s linear;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    h1, h2 {
+      font-family: 'Georgia', serif;
+      font-weight: normal;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    p {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .visible {
+      opacity: 1;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1rem 0;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <header>Imitations of Birds and Other Things</header>
+
+  <section><div class="container">
+    <h1>"All Rivers Are Alluvial" (6/3/2025)</h1>
+    <p>Oxbows halve flows that still live on their own.<br>
+      Drips and drops a young stream a brook a creek<br>
+      ticks and tocks across a loamy flick of sod of God<br>
+      hark sizzles of foam left leftward or wayward<br>
+      sharp trickle toward toward towards</p>
+      <p>Drizzle irrigates itself clay motes and seed pods<br>
+      conjoin and drop off wide turns and new plots<br>
+      into new pots and pans and plods and lops another gold<br>
+      oxbow’s flickering tracks alongside the river which<br>
+      glints in its own way onward onward onwards</p>
+      <p>On and on each flood whittles more earth,<br>
+      Each drought bakes it. The creek’s a canyon.<br>
+      Ceaseless flow if it knows what it knows.<br>
+      Forks meander; rivers rush and forget their flakes.<br>
+      The river carves and slakes its own settling path.<br>
+      Time ticks and locks.</p>
+      <p>All running rivers run to the sea,<br>
+      but what did the gold panner see in me?</p>
+  </div></section>
+
+  <section><div class="container">
+    <h1>"Birdwatching With My Daughter"</h1>
+     <p>Entangled turnstiles of boughs<br>
+      through which the wood thrush,<br>
+      climbing the length of the dawn,<br>
+      fast as quanta - light as an instant -<br>
+      rushes seen and unseen by me and Sylvia.</p>
+      <p>Inside, I hold my coffee and my baby,<br>
+      yawning through dawn, catching<br>
+      birds to learn together.</p>
+      <p>Look,<br>
+      see the bird?</p>
+      <p>And the thrush - and the thrush - are gone.<br>
+      Sylvia looks at me, anyway.</p>
+
+  </div></section>
+
+  <section><div class="container">
+    <h1>"A Shade of Light" (2/7/2023 ~10:40pm)</h1>
+   <p>There is a shade of light<br>
+      From perimeters<br>
+      That shivers through a downy cloud,<br>
+      Unbuttoning the dusky curtain,<br>
+      Over woods and fenced-in field.</p>
+      <p>To see it waft from darkled height,<br>
+      And lap the shaded field,<br>
+      Forms patterns in the mind at night-<br>
+      Paintings of the yield.</p>
+      <p>There is a shade of light<br>
+      From the wick that circumscribes.</p>
+
+  </div></section>
+
+  <section><div class="container">
+    <h1>"To Be a Father" (3:47 New Year’s Day)</h1>
+     <p>It is raining outside,<br>
+      A multiplicity of drips forken more drops,<br>
+      Pitter patter little hooves on pane for me,<br>
+      Inside, sweating a pool of ticks and tocks,<br>
+      and waiting:<br>
+      For if it shows I cannot go,<br>
+      To which I sow if four can know.</p>
+      <p>He, oaken elm full fat bodied,<br>
+      Chalk withering lick theft, I,<br>
+      Sheltered from the storm,<br>
+      In the helm hollow hutch and whisper<br>
+      Please please please<br>
+      A dew a dew<br>
+      I say<br>
+      To you</p>
+
+  </div></section>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const colors = [
+      [218, 165, 32],   // Goldenrod
+      [139, 69, 19],    // SaddleBrown
+      [25, 25, 112],    // MidnightBlue
+      [47, 79, 79]      // DarkSlateGray
+    ];
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    sections.forEach(section => observer.observe(section));
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const totalHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollFraction = scrollY / totalHeight;
+
+      const sectionCount = colors.length - 1;
+      const scaled = scrollFraction * sectionCount;
+      const index = Math.floor(scaled);
+      const t = scaled - index;
+
+      const blend = (start, end, t) => Math.round(start + (end - start) * t);
+      const color = index < sectionCount
+        ? colors[index].map((c, i) => blend(c, colors[index + 1][i], t))
+        : colors[sectionCount];
+
+      document.body.style.backgroundColor = `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.1)`;
+    });
+  </script>
+</body>
+</html>
